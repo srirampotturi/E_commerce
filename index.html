@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Online Book Store</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+		}
+		header{
+			display: flex;
+			justify-content: space-around;
+			background-color:aqua;
+			padding:7px;
+		}	
+		nav{
+			display: flex;
+			justify-content: space-around;
+			background-color:red;
+			padding:5px;
+		}
+		.electronic{
+			border:2px solid black;
+			float:left;
+			justify-content: center;
+			text-align: center;
+			background-color: #fff;
+			padding: 20px;
+      		border-radius: 10px;
+	 		margin-left:10px;
+	 		margin-bottom:10px;
+	 		margin-top:5px;
+      		box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+	  		height:390px;
+	  		width:240px;
+		}
+		#image{
+		  height:100px;
+		}
+
+        #cartButton {
+            top: 20px;
+            right: 20px;
+            padding: 10px;
+            background-color: #3498db;
+            color: #fff;
+            cursor: pointer;
+        }
+
+        #cartContainer {
+            position: fixed;
+            top: 0;
+            right: -300px;
+            height: 100%;
+            width: 300px;
+            background-color: #000;
+            color: #fff;
+            padding: 20px;
+            box-sizing: border-box;
+            overflow-y: auto;
+            transition: right 0.3s ease-in-out;
+        }
+
+        #closeCart {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            cursor: pointer;
+            color: #fff;
+        }
+		#image{
+		   width:200px;
+		   height:200px;
+		}
+
+        #cartDetails {
+            /* Cart details will be added here dynamically */
+        }
+    </style>
+</head>
+<body>
+	<header>
+		<div style="width:90%;text-align:center"><h2>E-Commerce</h2></div>
+		<div  id="cartButton" onclick="toggleCart()">Open Cart</div>
+	</header>
+	<nav>
+		<a href="#cloth" style="text-decoration:none">Cloths</a>
+		<a href="#accessories" style="text-decoration:none">Accessories</a>
+		<a href="#electronics" style="text-decoration:none">Electronics</a>
+	</nav>
+	<section>
+		<div id="accessories">
+			<div class="electronic">
+				<div id="imgage"><img src="apple.webp" id="image"/></div>
+				<h2>Apple AirPods Pro (2nd generation)</h2>
+				<p>Price: 19,990</p>
+				<button onclick="addToCart('apple.webp', 'Apple AirPods Pro (2nd generation)', 19,990)">Add to Cart</button>
+			</div>
+			<div class="electronic">
+				<div id="imgage"><img src="oppo.webp" id="image"/></div>
+				<h2>OPPO Enco Buds 2 </h2>
+				<p>Price: 1,799</p>
+				<button onclick="addToCart('oppo.webp','OPPO Enco Buds 2 ', 1,799)">Add to Cart</button>
+			</div>
+			<div class="electronic">
+				<div id="imgage"><img src="redmi.webp" id="image"/></div>
+				<h2>REDMI Ultra HD(4K) LED Smart Android TV </h2>
+				<p>Price: 23,999</p>
+				<button onclick="addToCart('redmi.webp','REDMI Ultra HD(4K) LED Smart Android TV', 23.999)">Add to Cart</button>
+			</div>
+			<div class="electronic">
+				<div id="imgage"><img src="samsung.webp" id="image"/></div>
+				<h2>SAMSUNG HD Ready LED Smart Tizen TV </h2>
+				<p>Price: 12,999</p>
+				<button onclick="addToCart('samsung.webp','SAMSUNG HD Ready LED Smart Tizen TV', 12,999)" >Add to Cart</button>
+			</div>
+			<div class="electronic">
+				<div id="imgage"><img src="vivo.webp" id="image"/></div>
+				<h2>vivo T2x 5G</h2>
+				<p>Price:12,999</p>
+				<button onclick="addToCart('oppo.webp','vivo T2x 5G', 12,999)">Add to Cart</button>
+			</div>
+			<div class="electronic">
+				<div id="imgage"><img src="iqoo.webp" id="image"/></div>
+				<h2>IQOO Z7s 5G </h2>
+				<p>Price:12,999</p>
+				<button onclick="addToCart('iqoo.webp','IQOO Z7s 5G ', 12,999)">Add to Cart</button>
+			</div>
+		</div>
+		<div id="cartContainer">
+			<div id="closeCart" onclick="toggleCart()">✖</div>
+			<h2>Shopping Cart</h2>
+			<div id="cartDetails">
+				<!-- Cart details will be added here dynamically -->
+			</div>
+		</div>
+		<script>
+			function addToCart(imgurl,name, price) {
+				// Create a new item for the cart
+				const cartItem = document.createElement('div');
+				cartItem.innerHTML = `
+				<img src='${imgurl}' style="height:100px;width:100px"/> 
+				<p>${name}</p>
+				<p>Price:${price}</p>
+				`;
+            
+				// Add a remove button to the cart item
+				const removeButton = document.createElement('button');
+				removeButton.textContent = 'Remove';
+				removeButton.onclick = function() {
+				// Remove the cart item when the remove button is clicked
+                cartItem.remove();
+            };
+
+				cartItem.appendChild(removeButton);
+
+				// Add the item to the cart
+				const cartContainer = document.getElementById('cartDetails');
+				cartContainer.appendChild(cartItem);
+			}
+
+			function toggleCart() {
+				// Toggle the visibility of the cart container
+				const cartContainer = document.getElementById('cartContainer');
+				cartContainer.style.right = (cartContainer.style.right === '-300px' || cartContainer.style.right === '') ? '0' : '-300px';
+			}
+		</script>
+
+</body>
+</html>
